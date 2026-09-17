@@ -9,7 +9,6 @@ class Solution {
             }
         }
 
-        //1st window
         int extra = 0;
         for(int i = 0; i < minutes; i++) {
             if(grumpy[i] == 1) {
@@ -23,12 +22,14 @@ class Solution {
             if(grumpy[i] == 1) {
                 extra += customers[i];
             }
+
             if(grumpy[i - minutes] == 1) {
                 extra -= customers[i - minutes];
             }
 
-            max = Math.max(max, extra);
+            max = Math.max(extra, max);
         }
+
         return satisfied + max;
     }
 }
