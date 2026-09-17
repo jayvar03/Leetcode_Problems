@@ -10,8 +10,8 @@ class Solution {
         for(int i = k; i < nums.length; i++) {
             sum += nums[i];
             sum -= nums[i - k];
-            max = Math.max(max, sum);
+            max = Math.max(sum, max);
         }
-        return (double) max/k;
+        return (double) max / k;
     }
 }
