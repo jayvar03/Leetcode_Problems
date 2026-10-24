@@ -3,30 +3,32 @@ class Solution {
         int n = nums.length;
         int sum = 0;
 
-        for(int num : nums) {
-            sum += num;
+        for(int a : nums) {
+            sum += a;
         }
 
-        if(Math.abs(target) > sum) return 0;
-        if((sum + target) % 2 != 0) return 0;
+        if(Math.abs(target) > sum || (sum + target) % 2 != 0) return 0;
 
-        int reqSum = (sum + target) / 2;
-
-        int[][] dp = new int[n + 1][reqSum + 1];
+        //s1 - s2 = diff --- 1
+        //s1 + s2 = sum --- 2
+        // add 1 & 2
+        //2s1 = sum + diff
+        int s1 = (sum + target) / 2;
+    
+        int[][] dp = new int[n + 1][s1 + 1];
 
         dp[0][0] = 1;
 
         for(int i = 1; i <= n; i++) {
-            for(int j = 0; j <= reqSum; j++) {
+            for(int j = 0; j <= s1; j++) {
 
                 dp[i][j] = dp[i - 1][j];
 
                 if(nums[i - 1] <= j) {
-                    dp[i][j] += dp[i - 1][j - nums[i - 1]];
+                    dp[i][j] = dp[i][j] + dp[i - 1][j - nums[i - 1]];
                 }
-            }
+            } 
         }
-
-        return dp[n][reqSum];
+        return dp[n][s1];
     }
 }
